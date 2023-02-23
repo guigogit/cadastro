@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\Models\Produto;
+use App\Models\Categoria;
 
 class ControladorProduto extends Controller
 {
@@ -13,7 +15,10 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        return view('produtos');
+        $categorias = Categoria::all();
+        return view('produtos', compact('categorias'));
+
+
     }
 
     /**
@@ -23,7 +28,8 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        //
+        return view('novoproduto'); // Eu acredito que essa referência seja encima do arquivo: novoproduto.blade.php(view)
+
     }
 
     /**
@@ -34,7 +40,10 @@ class ControladorProduto extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $prod = new Produto();
+        $prod->nome = $request->input('nomeProduto');
+        $prod->save();
+        return redirect('/produtos');
     }
 
     /**
@@ -56,7 +65,11 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
-        //
+        $prod = Produto::find($id);
+        if(isset($prod)){
+            return view('editarproduto', compact('prod'));
+        }
+        return redirect('/produtos');
     }
 
     /**
@@ -68,7 +81,12 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $prod = Produto::find($id);
+        if(isset($prod)){
+            $prod->nome = $request->input('nomeProduto');
+            $prod->save();
+        }
+        return redirect('/produtos');
     }
 
     /**
@@ -79,6 +97,10 @@ class ControladorProduto extends Controller
      */
     public function destroy($id)
     {
-        //
+        $prod = Produto::find($id);
+        if(isset($prod)){
+            $prod->delete();
+        }
+        return redirect('/produtos');
     }
 }

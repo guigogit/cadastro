@@ -18,9 +18,18 @@ Route::get('/', function () {
 });
 
 
-Route::get('/produtos', 'App\Http\Controllers\ControladorProduto@index');
+
 Route::get('/categorias', 'App\Http\Controllers\ControladorCategoria@index');
-Route::get('/categorias/novo', 'App\Http\Controllers\ControladorCategoria@create');
+Route::get('/categorias/novo', 'App\Http\Controllers\ControladorCategoria@create'); // Rota usada para cadastrar nova categoria
 Route::post('/categorias', 'App\Http\Controllers\ControladorCategoria@store');
+Route::get('/categorias/apagar/{id}', 'App\Http\Controllers\ControladorCategoria@destroy'); // Rota usada para apagar uma categoria
+Route::get('/categorias/editar/{id}', 'App\Http\Controllers\ControladorCategoria@edit'); // Rota usada para editar uma categoria
+Route::post('/categorias/{id}', 'App\Http\Controllers\ControladorCategoria@update'); // Rota usada para atualizar uma categoria
 
 
+Route::get('/produtos', 'App\Http\Controllers\ControladorProduto@index');
+Route::get('/produtos/novoproduto', 'App\Http\Controllers\ControladorProduto@create'); //Rota para cadastrar o produto
+Route::post('/produtos', 'App\Http\Controllers\ControladorProduto@store');
+Route::get('/produtos/apagar/{id}', 'App\Http\Controllers\ControladorProduto@destroy'); // Rota usada para apagar um produto
+Route::get('/produtos/editar/{id}', 'App\Http\Controllers\ControladorProduto@edit'); // Rota usada para editar um produto
+Route::post('/produtos/{id}', 'App\Http\Controllers\ControladorProduto@update'); // Rota usada para atualizar um produto
