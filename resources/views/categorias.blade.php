@@ -29,7 +29,7 @@
             @endif
         </div>
         <div class="card-footer">
-            <a href="/categorias/novo2" class="btn btn-sm btn-primary" role ="button"> Nova categoria </a>
+            <a href="/categorias/novo" class="btn btn-sm btn-primary" role ="button"> Nova categoria </a>
     </div>
 
 

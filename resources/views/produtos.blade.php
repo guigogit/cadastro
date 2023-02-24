@@ -1,31 +1,41 @@
 @extends('layout.app', ["current" =>"produtos"])
 
 @section('body')
+    <div class="card-border">
+        <div class = "card-body">
+            <h5 class ="card-title">Cadastro de produtos</h5>
 
-<form>
-    <div class="form-row align-items-center">
-        <div class="col-auto my-1">
-            <label class= "mr -sm-2" for="inlineFormCustomSelect">Categoria</label>
-            <select class="custom-select mr -sm-2" id="inlineFormCustomSelect" name = "categoria_id">
-                <option selected>Selecione </option>
-                    @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                    @endforeach
-            </select>
+            @if(count($prods) > 0)
+            <table class="table table-ordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome do Produto</th>
+                        <th>Estoque</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <body>
+                    @foreach($prods as $prod)
+                      <tr>
+                        <td>{{$prod->id}}</td>
+                        <td>{{$prod->nome}}</td>
+                        <td>{{$prod->estoque}}</td>
+                        <td>{{$prod->preco}}</td>
+                        <td>
+                            <a href="/produtos/editar/{{$prod->id}}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                        </td>
+                      </tr>
+                @endforeach
+                </body>
+            </table>
+            @endif
         </div>
-        <div class = "col-auto my-1">
-            <div class="custom-control custom-checkbox mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-
-            </div>
-        </div>
+        <div class="card-footer">
+            <a href="/produtos/novoproduto" class="btn btn-sm btn-primary" role ="button"> Novo produto </a>
 
     </div>
-</form>
 
-<div class="card-footer">
-    <a href="/produtos/novoproduto" class="btn btn-sm btn-primary" role ="button"> Novo produto </a>
-</div>
-@endsection
-
-
+    @endsection

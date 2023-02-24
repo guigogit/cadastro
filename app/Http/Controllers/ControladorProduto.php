@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Produto;
 use App\Models\Categoria;
+use App\Models\Produto;
 
 class ControladorProduto extends Controller
 {
@@ -15,9 +15,8 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all();
-        return view('produtos', compact('categorias'));
-
+        $prods = Produto::all();
+        return view('produtos', compact('prods'));
 
     }
 
@@ -28,7 +27,14 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        return view('novoproduto'); // Eu acredito que essa referência seja encima do arquivo: novoproduto.blade.php(view)
+        /*passando as categorias recuperadas para a view novoproduto.blade.php como uma variável $categorias.
+         Agora, na view novoproduto.blade.php, você pode usar a variável $categorias para gerar as opções do campo select.
+          Para isso, você pode usar a diretiva @foreach do Blade para iterar sobre as categorias e gerar as opções do campo select.
+        */
+        $categorias = Categoria::all();
+        return view('novoproduto', ['categorias' => $categorias]);
+
+        //return view('novoproduto'); // Eu acredito que essa referência seja encima do arquivo: novoproduto.blade.php(view)
 
     }
 
@@ -37,13 +43,35 @@ class ControladorProduto extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     *
      */
     public function store(Request $request)
     {
+           // Criação de um novo registro na tabela produtos
+            $prod = new Produto;
+            $prod->nome = $request->input('nome');
+            $prod->estoque = $request->input('estoque');
+            $prod->preco = $request->input('preco');
+            $prod->categoria_id = $request->input('categoria_id'); // assumindo que há um campo select com o nome categoria_id no formulário
+            dd($prod); // verifique se os valores dos atributos estão corretos
+            $prod->save();
+            if ($prod->save()) {
+                return redirect('/produtos');
+            } else {
+             echo "Não inseriu no banco de dados";
+            }
+// Redirecionamento para a página de listagem de produtos
+return redirect('/produtos');
+
+
+
+        /*
         $prod = new Produto();
         $prod->nome = $request->input('nomeProduto');
         $prod->save();
         return redirect('/produtos');
+        */
     }
 
     /**
