@@ -4,7 +4,8 @@
 
 <div class="card border">
     <div class="card-body">
-<form>
+<form action="/produtos"  method="POST">
+    @csrf <!-- Lembrar de sempre usar esse token -->
     <div class="form-row align-items-center">
         <div class="col-auto my-1">
             <label class= "mr -sm-2" for="inlineFormCustomSelect">Produto</label>
@@ -15,7 +16,7 @@
                         <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                     @endforeach
                     <input type="text" name="nome" placeholder="Nome do produto">
-                    <input type="text" name="estoque" placeholder="Estoque">
+                    <input type="text" name="estoque" placeholder="Quantidade">
                     <input type="number" name="preco" placeholder="Preço do produto">
 
             </select>

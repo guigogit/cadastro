@@ -54,7 +54,6 @@ class ControladorProduto extends Controller
             $prod->estoque = $request->input('estoque');
             $prod->preco = $request->input('preco');
             $prod->categoria_id = $request->input('categoria_id'); // assumindo que há um campo select com o nome categoria_id no formulário
-            dd($prod); // verifique se os valores dos atributos estão corretos
             $prod->save();
             if ($prod->save()) {
                 return redirect('/produtos');

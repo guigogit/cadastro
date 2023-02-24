@@ -11,7 +11,7 @@
                     <tr>
                         <th>Código</th>
                         <th>Nome do Produto</th>
-                        <th>Estoque</th>
+                        <th>Quantidade no Estoque</th>
                         <th>Preço</th>
                         <th>Ações</th>
                     </tr>
