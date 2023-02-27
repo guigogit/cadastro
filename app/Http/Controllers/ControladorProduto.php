@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Produto;
+use Illuminate\Support\Facades\DB;
 
 class ControladorProduto extends Controller
 {
@@ -15,8 +16,20 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        $prods = Produto::all();
-        return view('produtos', compact('prods'));
+        //$prods = Produto::all();
+        //return view('produtos', compact('prods'));
+
+        //$nome_cat = Categoria::all();
+        //return view('produtos', ['categorias' => $nome_cat]);
+
+        $prods = DB::table('produtos')
+        ->join('categorias', 'produtos.categoria_id', '=', 'categorias.id')
+        ->select('produtos.id as id','produtos.nome as nome', 'categorias.nome as categoria', 'produtos.preco as preco', 'produtos.estoque as estoque')
+        ->get();
+       // dd($prods);
+
+        return view('produtos',  compact('prods'));
+
 
     }
 
