@@ -5,7 +5,7 @@
     <div class="card-border">
         <div class = "card-body">
             <h5 class ="card-title">Cadastro de produtos</h5>
-
+        @if(is_countable($prods) && count($prods) > 0)
             <table class="table table-ordered table-hover">
                 <thead>
                     <tr>
@@ -18,26 +18,26 @@
                     </tr>
                 </thead>
                 <body>
-                    @foreach($prods as $prod)
-                      <tr>
-                        <td>{{$prod->id}}</td>
-                        <td>{{$prod->categoria}}</td>
-                        <td>{{$prod->nome}}</td>
-                        <td>{{$prod->estoque}}</td>
-                        <td>{{$prod->preco}}</td>
-                        <td>
-                            <a href="/produtos/editar/{{$prod->id}}" class="btn btn-sm btn-primary">Editar</a>
-                            <a href="/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger">Apagar</a>
-                        </td>
-                      </tr>
-                @endforeach
+                    @if(!empty($prods))
+                        @foreach($prods as $prod)
+                        <tr>
+                            <td>{{$prod->id}}</td>
+                            <td>{{$prod->categoria}}</td>
+                            <td>{{$prod->nome}}</td>
+                            <td>{{$prod->estoque}}</td>
+                            <td>{{ 'R$ ' . number_format($prod->preco, 2, ',', '.') }}</td>
+                            <td>
+                                <a href="/produtos/editar/{{$prod->id}}" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="/produtos/apagar/{{$prod->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </body>
             </table>
-
+        @endif
         </div>
         <div class="card-footer">
             <a href="/produtos/novoproduto" class="btn btn-sm btn-primary" role ="button"> Novo produto </a>
-
-    </div>
-
-    @endsection
+        </div>
+@endsection

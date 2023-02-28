@@ -16,9 +16,9 @@
                 </div>
                 <div class = "card border border-primary">
                     <div class = "card-body">
-                        <h5 class = "card-title">Cadastro de catetorias </h5>
+                        <h5 class = "card-title">Cadastro de categorias </h5>
                         <p class = "card=text">
-                            Cadastre as caterorias dos seus produtos.
+                            Cadastre as categorias dos seus produtos.
                         </p>
                         <a href="/categorias" class = "btn btn-primary"> Cadastre suas categorias</a>
                     </div>

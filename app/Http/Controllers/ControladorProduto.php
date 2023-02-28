@@ -16,17 +16,10 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        //$prods = Produto::all();
-        //return view('produtos', compact('prods'));
-
-        //$nome_cat = Categoria::all();
-        //return view('produtos', ['categorias' => $nome_cat]);
-
-        $prods = DB::table('produtos')
+       $prods = DB::table('produtos')
         ->join('categorias', 'produtos.categoria_id', '=', 'categorias.id')
         ->select('produtos.id as id','produtos.nome as nome', 'categorias.nome as categoria', 'produtos.preco as preco', 'produtos.estoque as estoque')
         ->get();
-       // dd($prods);
 
         return view('produtos',  compact('prods'));
 
@@ -74,9 +67,7 @@ class ControladorProduto extends Controller
              echo "Não inseriu no banco de dados";
             }
 // Redirecionamento para a página de listagem de produtos
-return redirect('/produtos');
-
-
+return view('/produtos', compact('prods', 'categorias'));
 
         /*
         $prod = new Produto();
@@ -106,8 +97,10 @@ return redirect('/produtos');
     public function edit($id)
     {
         $prod = Produto::find($id);
+        $categorias = Categoria::all();
+
         if(isset($prod)){
-            return view('editarproduto', compact('prod'));
+            return view('editarproduto', compact('prod','categorias'));
         }
         return redirect('/produtos');
     }
@@ -121,12 +114,22 @@ return redirect('/produtos');
      */
     public function update(Request $request, $id)
     {
-        $prod = Produto::find($id);
-        if(isset($prod)){
-            $prod->nome = $request->input('nomeProduto');
-            $prod->save();
+        $prods = Produto::find($id);
+        $categorias = Categoria::all();
+
+        if(isset($prods)){
+            $prods->nome = $request->input('nome');
+            $prods->estoque = $request->input('estoque');
+            $prods->preco = $request->input('preco');
+            $prods->categoria_id = $request->input('categoria_id');
+            $prods->save();
         }
-        return redirect('/produtos');
+
+            //return view('/produtos', compact('prods', 'categorias'));
+            return redirect('/produtos');
+
+        //return view('/produtos', ['produto' => $prods,'categorias' => $categorias]);
+
     }
 
     /**
