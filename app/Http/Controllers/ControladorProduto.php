@@ -120,7 +120,7 @@ return view('/produtos', compact('prods', 'categorias'));
         }
             //return view('/produtos', compact('prods', 'categorias'));
             return redirect('/produtos');
-}
+    }
     /**
      * Remove the specified resource from storage.
      *
