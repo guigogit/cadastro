@@ -22,8 +22,6 @@ class ControladorProduto extends Controller
         ->get();
 
         return view('produtos',  compact('prods'));
-
-
     }
 
     /**
@@ -39,9 +37,6 @@ class ControladorProduto extends Controller
         */
         $categorias = Categoria::all();
         return view('novoproduto', ['categorias' => $categorias]);
-
-        //return view('novoproduto'); // Eu acredito que essa referência seja encima do arquivo: novoproduto.blade.php(view)
-
     }
 
     /**
@@ -104,7 +99,6 @@ return view('/produtos', compact('prods', 'categorias'));
         }
         return redirect('/produtos');
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -124,14 +118,9 @@ return view('/produtos', compact('prods', 'categorias'));
             $prods->categoria_id = $request->input('categoria_id');
             $prods->save();
         }
-
             //return view('/produtos', compact('prods', 'categorias'));
             return redirect('/produtos');
-
-        //return view('/produtos', ['produto' => $prods,'categorias' => $categorias]);
-
-    }
-
+}
     /**
      * Remove the specified resource from storage.
      *
