@@ -3,11 +3,7 @@
 @section('body')
 <header>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 
 </header>
     <div class="card-border">
@@ -83,8 +79,7 @@
                         <div class="form-group">
                             <label for="categoriaProduto" class="control-label">Categoria</label>
                             <div class="input-group">
-                                <select class="form-control" id="categoriaProduto" >
-                                </select>
+                                <select class="form-control" id="categoriaProduto"></select>
                             </div>
                         </div>
                     </div>
@@ -99,25 +94,31 @@
 @endsection
 
 @section('javascript')
-
 <script type="text/javascript">
-    function novoProduto(){
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        }
+    });
+
+    function novoProduto() {
         $('#id').val('');
         $('#nomeProduto').val('');
         $('#precoProduto').val('');
         $('#quantidadeProduto').val('');
         $('#dlgProdutos').modal('show');
     }
-    function carregarCategorias() {
-    $.getJSON('/categorias', function(data) {
-        console.log(data);
 
-        for(i=0; i< data.length; i++) {
-            var opcao = '<option value="' + data[i].id + '">' + data[i].nome + '</option>';
-            $('#categoriaProduto').append(opcao);
-        }
-    });
-}
+    function carregarCategorias() {
+        $.getJSON('/api/categorias', function(data) {
+            for(i=0;i<data.length;i++) {
+                opcao = '<option value ="' + data[i].id + '">' +
+                    data[i].nome + '</option>';
+                $('#categoriaProduto').append(opcao);
+            }
+        });
+    }
     $(function (){
         carregarCategorias();
     });
