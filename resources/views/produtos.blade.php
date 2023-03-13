@@ -23,15 +23,16 @@
                     </tr>
                 </thead>
                 <body>
+
                     @if(!empty($prods))
                         @foreach($prods as $prod)
-                        <tr>
+                        <!--<tr>
                             <td>{{$prod->id}}</td>
                             <td>{{$prod->categoria}}</td>
                             <td>{{$prod->nome}}</td>
                             <td>{{$prod->estoque}}</td>
                             <td>{{ 'R$ ' . number_format($prod->preco, 2, ',', '.') }}</td>
-
+                        -->
                         </tr>
                         @endforeach
                     @endif
@@ -79,7 +80,9 @@
                         <div class="form-group">
                             <label for="categoriaProduto" class="control-label">Categoria</label>
                             <div class="input-group">
-                                <select class="form-control" id="categoriaProduto"></select>
+                                <select class="form-control" id="categoriaProduto"><option selected>Selecione </option></select>
+
+
                             </div>
                         </div>
                     </div>
@@ -96,11 +99,7 @@
 @section('javascript')
 <script type="text/javascript">
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        }
-    });
+
 
     function novoProduto() {
         $('#id').val('');
