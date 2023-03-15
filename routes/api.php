@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('categorias', '\App\Http\Controllers\ControladorCategoria@indexJson');
+Route::resource('/produtos', '\App\Http\Controllers\ControladorProduto');
 
 

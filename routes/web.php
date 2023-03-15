@@ -27,7 +27,7 @@ Route::get('/categorias/editar/{id}', 'App\Http\Controllers\ControladorCategoria
 Route::post('/categorias/{id}', 'App\Http\Controllers\ControladorCategoria@update'); // Rota usada para atualizar uma categoria
 
 
-Route::get('/produtos', 'App\Http\Controllers\ControladorProduto@index');
+Route::get('/produtos', 'App\Http\Controllers\ControladorProduto@indexView');
 Route::get('/produtos/novoproduto', 'App\Http\Controllers\ControladorProduto@create'); //Rota para cadastrar o produto
 Route::post('/produtos', 'App\Http\Controllers\ControladorProduto@store');
 Route::get('/produtos/apagar/{id}', 'App\Http\Controllers\ControladorProduto@destroy'); // Rota usada para apagar um produto

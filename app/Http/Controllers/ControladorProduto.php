@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Produto;
-use Illuminate\Support\Facades\DB;
+
 
 class ControladorProduto extends Controller
 {
@@ -14,7 +14,25 @@ class ControladorProduto extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+     public function indexView()
+     {
+        return view('produtos');
+
+
+     }
+
+
+     public function index()
+    {
+       $prods = Produto::all();
+       return $prods->toJson() ;
+
+    }
+
+/*
+     public function index()
     {
        $prods = DB::table('produtos')
         ->join('categorias', 'produtos.categoria_id', '=', 'categorias.id')
@@ -23,7 +41,7 @@ class ControladorProduto extends Controller
 
         return view('produtos',  compact('prods'));
     }
-
+*/
     /**
      * Show the form for creating a new resource.
      *
