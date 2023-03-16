@@ -68,7 +68,8 @@ class ControladorProduto extends Controller
     public function store(Request $request)
     {
            // Criação de um novo registro na tabela produtos
-            $prod = new Produto;
+
+           $prod = new Produto;
             $prod->nome = $request->input('nome');
             $prod->estoque = $request->input('estoque');
             $prod->preco = $request->input('preco');
@@ -79,8 +80,9 @@ class ControladorProduto extends Controller
             } else {
              echo "Não inseriu no banco de dados";
             }
-// Redirecionamento para a página de listagem de produtos
-return view('/produtos', compact('prods', 'categorias'));
+            // Redirecionamento para a página de listagem de produtos
+            //return view('/produtos', compact('prods', 'categorias'));
+            return json_encode($prod);
 
         /*
         $prod = new Produto();

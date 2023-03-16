@@ -83,6 +83,12 @@
 
 @section('javascript')
 <script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CRF-TOKEN': "{{ csrf_token() }}"
+    }
+
+});
 
     $.ajaxSetup({
         headers: {
@@ -134,6 +140,24 @@
         });
     }
 
+    function criarProduto() {
+        prod = {
+            nome: $("#nomeProduto").val(),
+            preco: $("#precoProduto").val(),
+            estoque: $("#quantidadeProduto").val(),
+            categoria_id: $("#categoriaProduto").val()
+        };
+        $.post("/api/produtos", prod, function(data) {
+
+        });
+    }
+
+    $("#formProduto").submit( function(event){
+        event.preventDefault();
+        criarProduto();
+        $("#dlgProdutos").modal('hide');
+
+ });
 
     $(function(){
         carregarCategorias();
