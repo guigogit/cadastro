@@ -83,6 +83,7 @@
 
 @section('javascript')
 <script type="text/javascript">
+
 $.ajaxSetup({
     headers: {
         'X-CRF-TOKEN': "{{ csrf_token() }}"
@@ -148,7 +149,9 @@ $.ajaxSetup({
             categoria_id: $("#categoriaProduto").val()
         };
         $.post("/api/produtos", prod, function(data) {
-
+            produto = JSON.parse('data');
+            linha = montarLinha(produto);
+            $('#tabelaProdutos>tbody').append(linha);
         });
     }
 
