@@ -82,7 +82,8 @@
 
 
 @section('javascript')
-<script type="text/javascript">
+<script src ="{{asset('js/app.js')}}" type="text/javascript">
+
 
 $.ajaxSetup({
     headers: {
