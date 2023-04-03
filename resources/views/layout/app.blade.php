@@ -1,10 +1,9 @@
 <html>
     <head>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- Latest compiled JavaScript -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <title>Cadastro de Produtos</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <style>
@@ -17,8 +16,6 @@
         </style>
     </head>
 <body>
-    <script src="{{ asset('js/app.js') }}"></script>
-
     <div class="container">
         @component('componente_navbar', [ "current" => $current ])
         @endcomponent
@@ -29,7 +26,7 @@
         </main>
     </div>
 
-    <script src="{{ asset('js/app.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('resources/js/app.js')}}" type="text/javascript"></script>
 
     @hasSection('javascript')
         @yield('javascript')
