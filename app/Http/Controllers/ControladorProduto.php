@@ -69,20 +69,14 @@ class ControladorProduto extends Controller
     {
            // Criação de um novo registro na tabela produtos
 
-           $prod = new Produto;
-            $prod->nome = $request->input('nome');
-            $prod->estoque = $request->input('estoque');
-            $prod->preco = $request->input('preco');
-            $prod->categoria_id = $request->input('categoria_id'); // assumindo que há um campo select com o nome categoria_id no formulário
-            $prod->save();
-            if ($prod->save()) {
-                return redirect('/produtos');
-            } else {
-             echo "Não inseriu no banco de dados";
-            }
-            // Redirecionamento para a página de listagem de produtos
-            //return view('/produtos', compact('prods', 'categorias'));
-            return json_encode($prod);
+           $prod = new Produto();
+           $prod->nome = $request->input('nome');
+           $prod->preco = $request->input('preco');
+           $prod->estoque = $request->input('estoque');
+           $prod->categoria_id = $request->input('categoria_id');
+           $prod->save();
+           return json_encode($prod);
+
 
         /*
         $prod = new Produto();
