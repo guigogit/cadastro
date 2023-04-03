@@ -69,7 +69,7 @@
                     </div>
                     <div class ="modal-footer">
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary" data-dissmiss=>Cancelar</button>
+                        <button type="cancel" class="btn btn-secondary" data-dismiss=>Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -130,6 +130,27 @@ $.ajaxSetup({
             }
         });
     }
+    function criarProduto() {
+        prod = {
+            nome: $("#nomeProduto").val(),
+            preco: $("#precoProduto").val(),
+            estoque: $("#quantidadeProduto").val(),
+            categoria_id: $("#categoriaProduto").val()
+        };
+        $.post("/api/produtos", prod, function(data) {
+            produto = JSON.parse(data);
+            linha = montarLinha(produto);
+            $('#tabelaProdutos>tbody').append(linha);
+        });
+    }
+
+    $("#formProduto").submit( function(event){
+        event.preventDefault();
+            criarProduto();
+
+        $("#dlgProdutos").modal('hide');
+    });
+
     $(function(){
         carregarCategorias();
         carregarProdutos();
