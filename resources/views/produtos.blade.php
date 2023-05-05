@@ -97,7 +97,7 @@ $.ajaxSetup({
 
     function carregarCategorias() {
         $.getJSON('/api/categorias', function(data) {
-            console.log(data);
+            //console.log(data);
             //
             for(i=0;i<data.length;i++){
                 opcao ='<option value ="' + data[i].id + '">' + data[i].nome + '</option>';
@@ -119,6 +119,27 @@ $.ajaxSetup({
             "</td>" +
             "</tr>";
         return linha;
+    }
+
+    function remover(id){
+        $.ajax({
+            type: "DELETE",
+            url: '/api/produtos/' + id,
+            context: this,
+            success: function(){
+                console.log('Apagou OK');
+                linhas = $("#tabelaProdutos>tbody>tr");
+               e = linhas.filter(function(i, elemento){
+                    return elemento.cells[0].textContent == id;
+                });
+                if(e)
+                    e.remove();
+            },
+            error: function(){
+                console.log('erro');
+            }
+
+        });
     }
 
 

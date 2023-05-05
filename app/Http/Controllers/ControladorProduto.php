@@ -122,15 +122,15 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        $prods = Produto::find($id);
+        $prod = Produto::find($id);
         $categorias = Categoria::all();
 
-        if(isset($prods)){
-            $prods->nome = $request->input('nome');
-            $prods->estoque = $request->input('estoque');
-            $prods->preco = $request->input('preco');
-            $prods->categoria_id = $request->input('categoria_id');
-            $prods->save();
+        if(isset($prod)){
+            $prod->nome = $request->input('nome');
+            $prod->estoque = $request->input('estoque');
+            $prod->preco = $request->input('preco');
+            $prod->categoria_id = $request->input('categoria_id');
+            $prod->save();
         }
             //return view('/produtos', compact('prods', 'categorias'));
             return redirect('/produtos');
@@ -146,7 +146,10 @@ class ControladorProduto extends Controller
         $prod = Produto::find($id);
         if(isset($prod)){
             $prod->delete();
+            return response('ok', 200);
         }
-        return redirect('/produtos');
+        return response('Produto não encontrado', 404);
+
+        //return redirect('/produtos');
     }
 }
