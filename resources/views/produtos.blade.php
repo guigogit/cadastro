@@ -97,8 +97,6 @@ $.ajaxSetup({
 
     function carregarCategorias() {
         $.getJSON('/api/categorias', function(data) {
-            //console.log(data);
-            //
             for(i=0;i<data.length;i++){
                 opcao ='<option value ="' + data[i].id + '">' + data[i].nome + '</option>';
                 $('#categoriaProduto').append(opcao);
@@ -119,6 +117,17 @@ $.ajaxSetup({
             "</td>" +
             "</tr>";
         return linha;
+    }
+
+    function editar(id){
+        $.getJSON('/api/produtos/'+id, function(data) {
+            $('#id').val(data.id);
+            $('#nomeProduto').val(data.nome);
+            $('#precoProduto').val(data.preco);
+            $('#quantidadeProduto').val(data.estoque);
+            $('#categoriaProduto').val(data.categoria_id);
+            $('#dlgProdutos').modal('show');
+        });
     }
 
     function remover(id){
