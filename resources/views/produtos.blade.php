@@ -104,13 +104,14 @@ $.ajaxSetup({
         });
     }
 
-    function montarLinha(p) {
+    function montarLinha(p,) {
         var linha = "<tr>" +
             "<td>" + p.id + "</td>" +
             "<td>" + p.nome + "</td>" +
             "<td>" + p.estoque + "</td>" +
             "<td>" + p.preco + "</td>" +
             "<td>" + p.categoria_id + "</td>" +
+            "<td>" + obterNomeCategoria(p.categoria_id) + "</td>" +
             "<td>" +
               '<button class="btn btn-sm btn-primary" onclick="editar(' + p.id + ')"> Editar </button> ' +
               '<button class="btn btn-sm btn-danger" onclick="remover(' + p.id + ')"> Apagar </button> ' +
@@ -129,6 +130,33 @@ $.ajaxSetup({
             $('#dlgProdutos').modal('show');
         });
     }
+    function obterNomeCategoria(idCategoria) {
+    var nomeCategoria = "";
+    $.ajax({
+        type: "GET",
+        url: '/api/categorias/' + idCategoria,
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            nomeCategoria = data.nome;
+        }
+    });
+    return nomeCategoria;
+}
+
+    function obterNomeCategoria(idCategoria) {
+    var nomeCategoria = "";
+    $.ajax({
+        type: "GET",
+        url: '/api/categorias/' + idCategoria,
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            nomeCategoria = data.nome;
+        }
+    });
+    return nomeCategoria;
+}
 
     function remover(id){
         $.ajax({
