@@ -1,3 +1,5 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @extends('layout.app', ["current" => "produtos" ])
 
 @section('body')
@@ -79,7 +81,9 @@
 @endsection
 
 @section('javascript')
+
 <script type="text/javascript">
+
 
 $.ajaxSetup({
     headers: {
@@ -101,24 +105,39 @@ $.ajaxSetup({
                 opcao ='<option value ="' + data[i].id + '">' + data[i].nome + '</option>';
                 $('#categoriaProduto').append(opcao);
             }
-        });
+      });
     }
 
-    function montarLinha(p,) {
-        var linha = "<tr>" +
-            "<td>" + p.id + "</td>" +
-            "<td>" + p.nome + "</td>" +
-            "<td>" + p.estoque + "</td>" +
-            "<td>" + p.preco + "</td>" +
-            "<td>" + p.categoria_id + "</td>" +
-            "<td>" + obterNomeCategoria(p.categoria_id) + "</td>" +
-            "<td>" +
-              '<button class="btn btn-sm btn-primary" onclick="editar(' + p.id + ')"> Editar </button> ' +
-              '<button class="btn btn-sm btn-danger" onclick="remover(' + p.id + ')"> Apagar </button> ' +
-            "</td>" +
-            "</tr>";
-        return linha;
-    }
+
+    function obterNomeCategoria(idCategoria) {
+    var nomeCategoria = "";
+    $.ajax({
+        type: 'GET',
+        url: '/api/categorias/' + idCategoria,
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            nomeCategoria = data.nome;
+            console.log(data);
+        }
+    });
+    return nomeCategoria;
+}
+    function montarLinha(p) {
+    var linha = "<tr>" +
+        "<td>" + p.id + "</td>" +
+        "<td>" + p.nome + "</td>" +
+        "<td>" + p.estoque + "</td>" +
+        "<td>" + p.preco + "</td>" +
+        //"<td>" + p.categoria_id + "</td>" +
+        "<td>" + obterNomeCategoria(p.categoria_id) + "</td>" +
+        "<td>" +
+          '<button class="btn btn-sm btn-primary" onclick="editar(' + p.id + ')"> Editar </button> ' +
+          '<button class="btn btn-sm btn-danger" onclick="remover(' + p.id + ')"> Apagar </button> ' +
+        "</td>" +
+        "</tr>";
+    return linha;
+}
 
     function editar(id){
         $.getJSON('/api/produtos/'+id, function(data) {
@@ -130,33 +149,9 @@ $.ajaxSetup({
             $('#dlgProdutos').modal('show');
         });
     }
-    function obterNomeCategoria(idCategoria) {
-    var nomeCategoria = "";
-    $.ajax({
-        type: "GET",
-        url: '/api/categorias/' + idCategoria,
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            nomeCategoria = data.nome;
-        }
-    });
-    return nomeCategoria;
-}
 
-    function obterNomeCategoria(idCategoria) {
-    var nomeCategoria = "";
-    $.ajax({
-        type: "GET",
-        url: '/api/categorias/' + idCategoria,
-        dataType: 'json',
-        async: false,
-        success: function(data) {
-            nomeCategoria = data.nome;
-        }
-    });
-    return nomeCategoria;
-}
+
+
 
     function remover(id){
         $.ajax({

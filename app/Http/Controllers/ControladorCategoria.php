@@ -49,7 +49,11 @@ class ControladorCategoria extends Controller
      */
     public function show($id)
     {
-        //
+        $cat = Categoria::find($id);
+        if(isset($cat)){
+            return json_encode($cat);
+        }
+        return response('Produto não encontrado', 404);
     }
 
     /**

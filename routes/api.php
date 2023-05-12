@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('categorias', '\App\Http\Controllers\ControladorCategoria@indexJson');
 Route::resource('/produtos', '\App\Http\Controllers\ControladorProduto');
+Route::get('/categorias/{id}', 'App\Http\Controllers\ControladorCategoria@show'); // Rota usada para atualizar uma categoria
 
 
